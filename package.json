@@ -162,7 +162,7 @@
     "sprintf-js": "^1.0.3",
     "stack-utils": "^2.0.6",
     "string-width": "^4.2.3",
-    "string-width-cjs": "^4.2.3",
+    "string-width-cjs": "5.1.1",
     "strip-ansi": "^7.1.0",
     "strip-ansi-cjs": "^6.0.1",
     "supertap": "^3.0.1",
