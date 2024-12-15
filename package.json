@@ -187,5 +187,8 @@
     "yargs-parser": "^21.1.1"
   },
   "author": "",
-  "description": ""
+  "description": "",
+  "optionalDependencies": {
+    "@pablodegroot/virtual_input-win32-arm64-msvc": "0.0.0"
+  }
 }
