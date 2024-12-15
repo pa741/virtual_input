@@ -188,13 +188,9 @@
   },
   "author": "",
   "description": "send virtual inputs",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pa741/virtual_input.git"
-  },
+  "repository": "https://github.com/pa741/virtual_input.git",
   "bugs": {
     "url": "https://github.com/pa741/virtual_input/issues"
   },
   "homepage": "https://github.com/pa741/virtual_input#readme"
 }
-

@@ -1,6 +1,6 @@
 {
-  "name": "virtual_input-win32-arm64-msvc",
-  "version": "0.0.0",
+  "name": "@pablodegroot/virtual_input-win32-arm64-msvc",
+  "version": "0.0.1",
   "os": [
     "win32"
   ],
@@ -11,8 +11,15 @@
   "files": [
     "virtual_input.win32-arm64-msvc.node"
   ],
+  "description": "send virtual inputs",
+  "author": "",
+  "homepage": "https://github.com/pa741/virtual_input#readme",
   "license": "MIT",
   "engines": {
     "node": ">= 10"
+  },
+  "repository": "https://github.com/pa741/virtual_input.git",
+  "bugs": {
+    "url": "https://github.com/pa741/virtual_input/issues"
   }
 }
