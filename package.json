@@ -1,6 +1,6 @@
 {
   "name": "@pablodegroot/virtual_input",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
@@ -197,3 +197,4 @@
   },
   "homepage": "https://github.com/pa741/virtual_input#readme"
 }
+
