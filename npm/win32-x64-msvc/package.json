@@ -1,5 +1,5 @@
 {
-  "name": "@pablodegroot/virtual_input-win32-x64-msvcc",
+  "name": "@pablodegroot/virtual_input-win32-x64-msvc",
   "version": "0.0.4",
   "os": [
     "win32"
