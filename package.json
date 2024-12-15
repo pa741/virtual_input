@@ -164,7 +164,7 @@
     "string-width": "^4.2.3",
     "string-width-cjs": "5.1.1",
     "strip-ansi": "^7.1.0",
-    "strip-ansi-cjs": "^6.0.1",
+    "strip-ansi-cjs": "8.0.0",
     "supertap": "^3.0.1",
     "tar": "^7.4.3",
     "temp-dir": "^3.0.0",
