@@ -1,6 +1,6 @@
 {
   "name": "@pablodegroot/virtual_input",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
@@ -9,7 +9,8 @@
       "defaults": false,
       "additional": [
         "aarch64-pc-windows-msvc",
-        "arm64-pc-windows-msvc"
+        "arm64-pc-windows-msvc",
+        "x86_64-pc-windows-msvc"
       ]
     }
   },
@@ -195,6 +196,7 @@
   },
   "homepage": "https://github.com/pa741/virtual_input#readme",
   "optionalDependencies": {
-    "@pablodegroot/virtual_input-win32-arm64-msvc": "0.0.2"
+    "@pablodegroot/virtual_input-win32-arm64-msvc": "0.0.4",
+    "@pablodegroot/virtual_input-win32-x64-msvc": "0.0.4"
   }
 }

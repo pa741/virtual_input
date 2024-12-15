@@ -1,15 +1,15 @@
 {
-  "name": "@pablodegroot/virtual_input-win32-arm64-msvc",
+  "name": "@pablodegroot/virtual_input-win32-x64-msvcc",
   "version": "0.0.4",
   "os": [
     "win32"
   ],
   "cpu": [
-    "arm64"
+    "x64"
   ],
-  "main": "virtual_input.win32-arm64-msvc.node",
+  "main": "virtual_input.win32-x64-msvc.node",
   "files": [
-    "virtual_input.win32-arm64-msvc.node"
+    "virtual_input.win32-x64-msvc.node"
   ],
   "description": "send virtual inputs",
   "author": "",
