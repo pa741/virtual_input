@@ -310,9 +310,10 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { sum, sendRightClickAt, sendLeftClickAt, sendMiddleClickAt } = nativeBinding
+const { sum, sendRightClickAt, sendLeftClickAt, sendMiddleClickAt, sendMouseMoveAt } = nativeBinding
 
 module.exports.sum = sum
 module.exports.sendRightClickAt = sendRightClickAt
 module.exports.sendLeftClickAt = sendLeftClickAt
 module.exports.sendMiddleClickAt = sendMiddleClickAt
+module.exports.sendMouseMoveAt = sendMouseMoveAt

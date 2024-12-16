@@ -3,10 +3,8 @@
 #[macro_use]
 extern crate napi_derive;
 
-#[napi]
-pub fn sum(a: i32, b: i32) -> i32 {
-  a + b
-}
+
+
 use std::{fmt::Error, os::windows, thread::sleep};
 
 #[napi]
@@ -21,8 +19,16 @@ unsafe fn send_left_click_at(x: i32, y: i32) {
 unsafe fn send_middle_click_at(x: i32, y: i32) {
   send_click_at(x, y, WM_MBUTTONDOWN, WM_LBUTTONUP);
 }
+#[napi]
+unsafe fn send_mouse_move_at(x:i32,y:i32){
+    let point = ::windows::Win32::Foundation::POINT { x, y };
+    let win = get_window_at(point).unwrap();
+    send_move(win, point);
+
+}
 
 
+use napi::{sys::ThreadsafeFunctionCallMode, threadsafe_function::ThreadSafeCallContext, CallContext, JsFunction, JsUndefined};
 use ::windows::{
     Foundation::Point,
     Win32::{
@@ -33,10 +39,7 @@ use ::windows::{
                 SetFocus,
             },
             WindowsAndMessaging::{
-                ChildWindowFromPoint, ChildWindowFromPointEx, GetCursorPos, GetParent,
-                GetWindowInfo, GetWindowTextA, PostMessageA, SendMessageA, WindowFromPoint,
-                CWP_SKIPDISABLED, CWP_SKIPINVISIBLE, WINDOWINFO, WM_LBUTTONDOWN, WM_LBUTTONUP,
-                WM_MBUTTONDOWN, WM_MOUSEACTIVATE, WM_NCHITTEST, WM_PAINT, WM_PARENTNOTIFY,
+                ChildWindowFromPoint, ChildWindowFromPointEx, GetCursorPos, GetParent, GetWindowInfo, GetWindowTextA, PostMessageA, SendMessageA, WindowFromPoint, CWP_SKIPDISABLED, CWP_SKIPINVISIBLE, WINDOWINFO, WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MBUTTONDOWN, WM_MOUSEACTIVATE, WM_MOUSEMOVE, WM_NCHITTEST, WM_PAINT, WM_PARENTNOTIFY
             },
         },
     },
@@ -78,7 +81,7 @@ unsafe fn get_top_parent(win: HWND) -> HWND {
         let mut parent = win;
         loop {
             let p = GetParent(parent);
-            print!("Parent: {:?}", p);
+            //print!("Parent: {:?}", p);
             if p.is_err() {
                 break;
             }
@@ -107,7 +110,11 @@ unsafe fn send_click_at(x: i32, y: i32, button_down: u32, button_up: u32) {
     let win = get_window_at(point).unwrap();
     send_click(win, point , button_down, button_up);
 }
-
+unsafe fn send_move(win: HWND, point: ::windows::Win32::Foundation::POINT){
+    let p = get_relative_point(win, point);
+    let lparam = LPARAM((p.y as isize) << 16 | (p.x as isize) & 0xFFFF);
+    PostMessageA(win, WM_MOUSEMOVE, WPARAM(1), lparam).unwrap();
+}
 
 unsafe fn send_click(win: HWND, point: ::windows::Win32::Foundation::POINT, button_down: u32, button_up: u32) {
     let p = get_relative_point(win, point);
