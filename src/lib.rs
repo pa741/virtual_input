@@ -55,25 +55,30 @@ unsafe fn get_window_at(point: ::windows::Win32::Foundation::POINT) -> Result<HW
 unsafe fn get_relative_point(
     win: HWND,
     point: ::windows::Win32::Foundation::POINT,
-) -> ::windows::Win32::Foundation::POINT {
+) -> Result<::windows::Win32::Foundation::POINT, Error> {
     
         let mut info = WINDOWINFO::default();
-        GetWindowInfo(win, &mut info).unwrap();
+        let inf = GetWindowInfo(win, &mut info);
+        if(inf.is_err()){
+            return Err(Error);
+        }
         let p2 = ::windows::Win32::Foundation::POINT {
             x: point.x - info.rcClient.left,
             y: point.y - info.rcClient.top,
         };
-        return p2;
+        return Ok(p2);
     
 }
-unsafe fn get_child_window_at_abs_point(parent: HWND, point: ::windows::Win32::Foundation::POINT) -> HWND {
+unsafe fn get_child_window_at_abs_point(parent: HWND, point: ::windows::Win32::Foundation::POINT) -> Result<HWND, Error> {
    
         let mut info = WINDOWINFO::default();
         GetWindowInfo(parent, &mut info).unwrap();
         let p2 = get_relative_point(parent, point);
-
-        let win = ChildWindowFromPoint(parent, p2);
-        return win;
+        if(p2.is_err()){
+            return Err(Error);
+        }
+        let win = ChildWindowFromPoint(parent, p2.unwrap());
+        return Ok(win);
     
 }
 unsafe fn get_top_parent(win: HWND) -> HWND {
@@ -112,13 +117,23 @@ unsafe fn send_click_at(x: i32, y: i32, button_down: u32, button_up: u32) {
 }
 unsafe fn send_move(win: HWND, point: ::windows::Win32::Foundation::POINT){
     let p = get_relative_point(win, point);
-    let lparam = LPARAM((p.y as isize) << 16 | (p.x as isize) & 0xFFFF);
+    if(p.is_err()){
+        return;
+    }
+    let po = p.unwrap();
+    let lparam = LPARAM((po.y as isize) << 16 | (po.x as isize) & 0xFFFF);
     PostMessageA(win, WM_MOUSEMOVE, WPARAM(1), lparam).unwrap();
 }
 
 unsafe fn send_click(win: HWND, point: ::windows::Win32::Foundation::POINT, button_down: u32, button_up: u32) {
     let p = get_relative_point(win, point);
-    let lparam = LPARAM((p.y as isize) << 16 | (p.x as isize) & 0xFFFF);
+    if(p.is_err()){
+        return;
+    }
+    let po = p.unwrap();
+
+    let lparam = LPARAM((po.y as isize) << 16 | (po.x as isize) & 0xFFFF);
+    
     let top_parent = get_top_parent(win);
     println!("Top Parent: {:?}", top_parent);
     //notify parent
