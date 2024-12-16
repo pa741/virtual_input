@@ -122,7 +122,7 @@ unsafe fn send_move(win: HWND, point: ::windows::Win32::Foundation::POINT){
     }
     let po = p.unwrap();
     let lparam = LPARAM((po.y as isize) << 16 | (po.x as isize) & 0xFFFF);
-    PostMessageA(win, WM_MOUSEMOVE, WPARAM(1), lparam).unwrap();
+    let _ = PostMessageA(win, WM_MOUSEMOVE, WPARAM(1), lparam);
 }
 
 unsafe fn send_click(win: HWND, point: ::windows::Win32::Foundation::POINT, button_down: u32, button_up: u32) {
